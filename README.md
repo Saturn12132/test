@@ -264,8 +264,7 @@ Element:Unlock()  -- Unlock
 ```
 
 ## Check the value of an existing element
-```
+
 To check the current value of an existing element, using the variable, `ElementName.CurrentValue`, if it’s a keybind or dropdown, you will need to use `KeybindName.CurrentKeybind` or ```DropdownName.CurrentOption``` You can also check it via the `flags from Rayfield.Flags`
-```
 
 </details>

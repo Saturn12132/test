@@ -265,7 +265,7 @@ Element:Unlock()  -- Unlock
 
 ## Check the value of an existing element
 ```
-To check the current value of an existing element, using the variable, you can do <code>ElementName.CurrentValue</code>, if it’s a keybind or dropdown, you will need to use <code>KeybindName.CurrentKeybind</code> or <code>DropdownName.CurrentOption</code> You can also check it via the <code>flags from Rayfield.Flags</code>
+To check the current value of an existing element, using the variable, you can do <mark style="background-color: #FFFF00">ElementName.CurrentValue</mark> , if it’s a keybind or dropdown, you will need to use <code>KeybindName.CurrentKeybind</code> or <code>DropdownName.CurrentOption</code> You can also check it via the <code>flags from Rayfield.Flags</code>
 ```
 
 </details>

@@ -268,3 +268,30 @@ Element:Unlock()  -- Unlock
 To check the current value of an existing element, using the variable, `ElementName.CurrentValue`, if it’s a keybind or dropdown, you will need to use `KeybindName.CurrentKeybind` or ```DropdownName.CurrentOption``` You can also check it via the `flags from Rayfield.Flags`
 
 </details>
+
+<details>
+<summary>Textual Components</summary>
+
+## Creating a Label
+
+```lua
+local Label = Tab:CreateLabel("Label Example",SectionParent)
+```
+
+## Updating a Label
+
+```lua
+Label:Set("Label Example")
+```
+
+## Creating a Paragraph
+
+```lua
+local Paragraph = Tab:CreateParagraph({Title = "Paragraph Example", Content = "Paragraph Example",SectionParent})
+```
+
+## Updating a Paragraph
+
+```lua
+Paragraph:Set({Title = "Paragraph Example", Content = "Paragraph Example"})
+```

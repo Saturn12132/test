@@ -14,7 +14,7 @@ getgenv().SecureMode = true
 
 ## Anti Auto Load Configuration
 ```lua
-getgenv().DisableArrayfieldAutoLoad
+getgenv().DisableArrayfieldAutoLoad = true
 ```
 
 ## Load Configuration

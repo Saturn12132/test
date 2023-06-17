@@ -241,6 +241,16 @@ local Dropdown = Tab:CreateDropdown({
 })
 ```
 
+## Updating a Dropdown menu
+```lua
+Dropdown:Set("Option 2") -- The new option value
+
+Dropdown:Refresh({<table>},<selected>)
+
+Dropdown:Add('test')
+Dropdown:Remove('test')
+```
+
 ## General Settings
 ```lua
 --Optional

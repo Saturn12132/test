@@ -64,7 +64,7 @@ local Tab = Window:CreateTab("Tab Example", 4483362458)
 
 ## Creating a Section
 ```lua
-local Section = Tab:CreateSection("Section Example")
+local Section = Tab:CreateSection("Section Example",true/false)
 ```
 
 ## Updating a Section

@@ -161,6 +161,34 @@ Callback = <function> - The function of the slider.
 ]]
 ```
 
+## Creating a Slider
+```lua
+Tab:AddSliderToggle({
+	Name = "This is a toggle!",
+	Min = 0,
+	Max = 20,
+	Default = 5,
+	Color = Color3.fromRGB(1,1,1),
+	Increment = 1,
+	ValueName = "Bananas",
+	OnUnToggled = false,
+	Callback = function(Value)
+		print(Value)
+	end    
+})
+
+--[[
+Name = <string> - The name of the slider.
+Min = <number> - The minimal value of the slider.
+Max = <number> - The maxium value of the slider.
+Color = Color3.fromRGB(rgb) - The color of the slider
+Increment = <number> - How much the slider will change value when dragging.
+OnUnToggled = <number> - The default value of the slider.
+ValueName = <string> - The text after the value number.
+Callback = <function> - The function of the slider.
+]]
+```
+
 ### Change Slider Value
 ```lua
 Slider:Set(2)

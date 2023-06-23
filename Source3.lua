@@ -1427,7 +1427,7 @@ function OrionLib:MakeWindow(WindowConfig)
 					BackgroundTransparency = 0.3,
 					ClipsDescendants = true
 				}), {
-					AddThemeObject(SetProps(MakeElement("Label", "value", 13), {
+					AddThemeObject(SetProps(MakeElement("Label", ToggleConfig.Name, 13), {
 						Size = UDim2.new(1, -12, 0, 14),
 						Position = UDim2.new(0, 12, 0, 6),
 						Font = Enum.Font.GothamBold,
@@ -1444,7 +1444,7 @@ function OrionLib:MakeWindow(WindowConfig)
 					SetProps(MakeElement("Stroke"), {
 						Color = SliderConfig.Color
 					}),
-					AddThemeObject(SetProps(MakeElement("Label", "value", 13), {
+					AddThemeObject(SetProps(MakeElement("Label", SliderConfig.ValueName, 13), {
 						Size = UDim2.new(1, -12, 0, 14),
 						Position = UDim2.new(0, 12, 0, 39),
 						Font = Enum.Font.GothamBold,

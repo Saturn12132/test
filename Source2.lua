@@ -19,6 +19,7 @@ local OrionLib = {
 			Text = Color3.fromRGB(75, 75, 75),
 			Text3 = Color3.fromRGB(75, 75, 75),
 			TextDark = Color3.fromRGB(50, 50, 50),
+			Accent = Color3.fromRGB(0, 255, 0)
 		},
 		Darkmode = {
 			Main = Color3.fromRGB(33, 37, 41),

@@ -161,7 +161,7 @@ Callback = <function> - The function of the slider.
 ]]
 ```
 
-## Creating a Slider
+## Creating a SliderToggle
 ```lua
 Tab:AddSliderToggle({
 	Name = "This is a toggle!",
@@ -172,6 +172,7 @@ Tab:AddSliderToggle({
 	Increment = 1,
 	ValueName = "Bananas",
 	OnUnToggled = false,
+	Default = false,
 	Callback = function(Value)
 		print(Value)
 	end    

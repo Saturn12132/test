@@ -172,7 +172,6 @@ Tab:AddSliderToggle({
 	Increment = 1,
 	ValueName = "Bananas",
 	OnUnToggled = false,
-	Default = false,
 	Callback = function(Value)
 		print(Value)
 	end    

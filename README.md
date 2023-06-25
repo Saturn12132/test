@@ -287,13 +287,13 @@ local Keybind = Tab:CreateKeybind({
 })
 ```
 
-</details>
-
 ## Updating a Keybind
 
 ```lua
 Keybind:Set("RightCtrl") -- Keybind (string)
 ```
+
+</details>
 
 <details>
 <summary>Textual Components</summary>

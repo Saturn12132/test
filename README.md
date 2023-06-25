@@ -4,17 +4,12 @@
 
 ## Booting the Library
 ```lua
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local ArrayField = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/ArrayField/main/Source.lua'))()
 ```
 
 ## Secure Mode
 ```lua
 getgenv().SecureMode = true
-```
-
-## Anti Auto Load Configuration
-```lua
-getgenv().DisableArrayfieldAutoLoad = true
 ```
 
 ## Load Configuration
@@ -29,14 +24,14 @@ Rayfield:LoadConfiguration()
 
 ## Create a window
 ```lua
-local Window = Rayfield:CreateWindow({
-   Name = "Rayfield Example Window",
-   LoadingTitle = "Rayfield Interface Suite",
-   LoadingSubtitle = "by Sirius",
+local Window = ArrayField:CreateWindow({
+   Name = "ArrayField Example Window",
+   LoadingTitle = "ArrayField Interface Suite",
+   LoadingSubtitle = "by Arrays",
    ConfigurationSaving = {
       Enabled = true,
       FolderName = nil, -- Create a custom folder for your hub/game
-      FileName = "Big Hub"
+      FileName = "ArrayField"
    },
    Discord = {
       Enabled = false,
@@ -48,9 +43,17 @@ local Window = Rayfield:CreateWindow({
       Title = "Untitled",
       Subtitle = "Key System",
       Note = "No method of obtaining the key is provided",
-      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      FileName = "Key", -- It is recommended to use something unique as other scripts using ArrayField may overwrite your key file
       SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
-      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like ArrayField to get the key from
+      Actions = {
+            [1] = {
+                Text = 'Click here to copy the key link <--',
+                OnPress = function()
+                    print('Pressed')
+                end,
+                }
+            },
       Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
    }
 })
@@ -76,31 +79,26 @@ Section:Lock()
 Section:Unlock()
 ```
 
-## Prompting the
+## Prompting the window
 ```lua
 Window:Prompt({
-	Title = 'Interface Prompt',
-	SubTitle = 'SubTitle',
-	Content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-	Actions = {
-		Accept = {
-			Name = 'Accept',
-			Callback = function()
-				-- You know what a callback is...
-			end,
-		}
-	}
+    Title = 'Interface Prompt',
+    SubTitle = 'SubTitle',
+    Content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    Actions = {
+        Accept = {
+            Name = 'Accept',
+            Callback = function()
+                print('Pressed')
+            end,
+        }
+    }
 })
-```
-
-## Switch Tab Interface
-```lua
-Rayfield:ToggleOldTabStyle(true) -- Switch to false if you want the new style
 ```
 
 ## Destroying the Interface
 ```lua
-Rayfield:Destroy()
+ArrayField:Destroy()
 ```
 
 </details>
@@ -110,7 +108,7 @@ Rayfield:Destroy()
 
 ## Notifying the user
 ```lua
-Rayfield:Notify({
+ArrayField:Notify({
    Title = "Notification Title",
    Content = "Notification Content",
    Duration = 6.5,
@@ -122,7 +120,7 @@ Rayfield:Notify({
          print("The user tapped Okay!")
       end
    },
-},
+ },
 })
 ```
 
@@ -130,6 +128,7 @@ Rayfield:Notify({
 ```lua
 local Button = Tab:CreateButton({
    Name = "Button Example",
+   Interact = 'Click',
    Callback = function()
    -- The function that takes place when the button is pressed
    end,
@@ -138,7 +137,7 @@ local Button = Tab:CreateButton({
 
 ## Updating a Button
 ```lua
-Button:Set("Button Example")
+Button:Set("Button Example", "Interact")
 ```
 
 ## Creating a Toggle
@@ -203,25 +202,13 @@ Slider:Set(10) -- The new slider integer value
 local Input = Tab:CreateInput({
    Name = "Input Example",
    PlaceholderText = "Input Placeholder",
-   RemoveTextAfterFocusLost = false,
+   NumbersOnly = true, -- If the user can only type numbers. Remove or set to false if none.
+   CharacterLimit = 15, --max character limit. Remove or set to false
+   OnEnter = true, -- Will callback only if the user pressed ENTER while being focused on the the box.
+   RemoveTextAfterFocusLost = false, -- Speaks for itself.
    Callback = function(Text)
    -- The function that takes place when the input is changed
    -- The variable (Text) is a string for the value in the text box
-   end,
-})
-```
-
-## Creating an Old Dropdown menu
-```lua
-local Dropdown = Tab:OldCreateDropdown({
-   Name = "Dropdown Example",
-   Options = {"Option 1","Option 2"},
-   CurrentOption = {"Option 1"},
-   MultipleOptions = false,
-   Flag = "Dropdown1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Option)
-   -- The function that takes place when the selected option is changed
-   -- The variable (Option) is a table of strings for the current selected options
    end,
 })
 ```
@@ -231,19 +218,19 @@ local Dropdown = Tab:OldCreateDropdown({
 local Dropdown = Tab:CreateDropdown({
    Name = "Dropdown Example",
    Options = {"Option 1","Option 2"},
-   CurrentOption = {"Option 1"},
-   MultipleOptions = false,
+   CurrentOption = "Option 1" or {"Option 1","Option 3"},
+   MultiSelection = true, -- If MultiSelections is allowed
    Flag = "Dropdown1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(Option)
    -- The function that takes place when the selected option is changed
-   -- The variable (Option) is a table of strings for the current selected options
+   -- The variable (Option) is a string for the value that the dropdown was changed to
    end,
 })
 ```
 
 ## Updating a Dropdown menu
 ```lua
-Dropdown:Set("Option 2") -- The new option value
+Dropdown:Set("Option 2" or <table>) -- The new option value
 
 Dropdown:Refresh({<table>},<selected>)
 
@@ -255,9 +242,12 @@ Dropdown:Remove('test')
 ```lua
 --Optional
 local ElementExample
-ElementExample = Tab:Create____({
+ElementExample = Tab:Create______({
 
-Info = 'Description/info',
+Info = {
+   Image = '1234567890',
+   Text = 'Description for the prompt'
+},
 SectionParent = Section -- Section it's parented to
 
 })
@@ -269,15 +259,41 @@ Element:Destroy() -- Destroy
 
 Element:Visible(<bool>)
 
-Element:Lock(Reason:<string>)    -- Lock
+Element:Lock(Reason:<string>) -- Lock
 Element:Unlock()  -- Unlock
 ```
 
 ## Check the value of an existing element
 
-To check the current value of an existing element, using the variable, `ElementName.CurrentValue`, if it’s a keybind or dropdown, you will need to use `KeybindName.CurrentKeybind` or ```DropdownName.CurrentOption``` You can also check it via the `flags from Rayfield.Flags`
+To check the current value of an existing element, using the variable, `ElementName.CurrentValue`, if it’s a keybind or dropdown, you will need to use `KeybindName.CurrentKeybind` or ```DropdownName.CurrentOption``` You can also check it via the `flags from ArrayField.Flags`
 
 </details>
+
+<details>
+<summary>Binds</summary>
+
+## Creating a Keybind
+
+```lua
+local Keybind = Tab:CreateKeybind({
+   Name = "Keybind Example",
+   CurrentKeybind = "Q",
+   HoldToInteract = false,
+   Flag = "Keybind1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Keybind)
+   -- The function that takes place when the keybind is pressed
+   -- The variable (Keybind) is a boolean for whether the keybind is being held or not (HoldToInteract needs to be true)
+   end,
+})
+```
+
+</details>
+
+## Updating a Keybind
+
+```lua
+Keybind:Set("RightCtrl") -- Keybind (string)
+```
 
 <details>
 <summary>Textual Components</summary>
@@ -305,3 +321,247 @@ local Paragraph = Tab:CreateParagraph({Title = "Paragraph Example", Content = "P
 ```lua
 Paragraph:Set({Title = "Paragraph Example", Content = "Paragraph Example"})
 ```
+
+</details>
+
+<details>
+<summary>Script Template</summary>
+
+## Script
+
+```lua
+local ArrayField = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/ArrayField/main/Source'))()
+local Window = ArrayField:CreateWindow({
+        Name = "ArrayField Example Window",
+        LoadingTitle = "ArrayField Interface Suite",
+        LoadingSubtitle = "by Arrays",
+        ConfigurationSaving = {
+            Enabled = true,
+            FolderName = nil, -- Create a custom folder for your hub/game
+            FileName = "ArrayField"
+        },
+        Discord = {
+            Enabled = false,
+            Invite = "sirius", -- The Discord invite code, do not include discord.gg/
+            RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+        },
+        KeySystem = true, -- Set this to true to use our key system
+        KeySettings = {
+            Title = "ArrayField",
+            Subtitle = "Key System",
+            Note = "Join the discord (discord.gg/sirius)",
+            FileName = "ArrayFieldsKeys",
+            SaveKey = false,
+            GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like ArrayField to get the key from
+            Key = {"Hello",'Bye'},
+            Actions = {
+                [1] = {
+                    Text = 'Click here to copy the key link',
+                    OnPress = function()
+
+                    end,
+                }
+            },
+        }
+    })
+    local Tab = Window:CreateTab("Tab Example", 4483362458) -- Title, Image
+    local Tab2 = Window:CreateTab("Tab Example 2") -- Title, Image
+    local Section = Tab:CreateSection("Section Example",false) -- The 2nd argument is to tell if its only a Title and doesnt contain element
+    Tab:CreateSpacing(nil,10)
+    local Button = Tab:CreateButton({
+        Name = "Button Example",
+        Info = {
+            Title = 'This is a Button',
+            Description = 'This is a description for the button you know.',
+        },
+        Interact = 'Changable',
+        Callback = function()
+            print('Pressed')
+        end,
+    })
+    Tab:CreateSpacing(nil,10)
+    local Toggle = Tab:CreateToggle({
+        Name = "Toggle Example",
+        Info = {
+            Title = 'Slider template',
+            Image = '12735851647',
+            Description = 'Just a slider for stuff',
+        },
+        CurrentValue = false,
+        Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+        Callback = function(Value)
+            print(Value)
+        end,
+    })
+    Tab:CreateSpacing(nil,10)
+    local ColorPicker = Tab:CreateColorPicker({
+        Name = "Color Picker",
+        Color = Color3.fromRGB(2,255,255),
+        Flag = "ColorPicker1",
+        Callback = function(Value)
+            print(Value)
+        end
+    })
+    Tab:CreateSpacing(nil,10)
+    local Slider = Tab:CreateSlider({
+        Name = "Slider Example",
+        Range = {0, 100},
+        Increment = 10,
+        Suffix = "Bananas",
+        CurrentValue = 10,
+        Flag = "Slider1",
+        Callback = function(Value)
+            print(Value)
+        end,
+    })
+    Tab:CreateSpacing(nil,10)
+    local Keybind = Tab:CreateKeybind({
+        Name = "Keybind Example",
+        CurrentKeybind = "Q",
+        HoldToInteract = false,
+        Flag = "Keybind1",
+        Callback = function(Keybind)
+
+        end,
+    })
+    Tab:CreateSpacing(nil,10)
+    local Section2 = Tab:CreateSection("Inputs Examples",true)
+    Tab:CreateInput({
+        Name = "Numbers Only",
+        PlaceholderText = "Amount",
+        NumbersOnly = true,
+        OnEnter = true,
+        RemoveTextAfterFocusLost = true,
+        Callback = function(Text)
+            print(Text)
+        end,
+    })
+    Tab:CreateInput({
+        Name = "11 Characters Limit",
+        PlaceholderText = "Text",
+        CharacterLimit = 11,
+        RemoveTextAfterFocusLost = true,
+        Callback = function(Text)
+            print(Text)
+        end,
+    })
+    Tab:CreateInput({
+        Name = "No RemoveTextAfterFocusLost",
+        PlaceholderText = "Input",
+        RemoveTextAfterFocusLost = false,
+        Callback = function(Text)
+            print(Text)
+        end,
+    })
+    local Section3= Tab:CreateSection("Dropdown Examples",true)
+    local MultiSelectionDropdown = Tab:CreateDropdown({
+        Name = "Multi Selection",
+        Options = {"Option 1","Option 2",'Option 3'},
+        CurrentOption = {"Option 1","Option 3"} ,
+        MultiSelection = true,
+        Flag = "Dropdown1",
+        Callback = function(Option)
+            print(Option)
+        end,
+    })
+    local SingleSelection = Tab:CreateDropdown({
+        Name = "Single Selection",
+        Options = {"Option 1","Option 2"},
+        CurrentOption = "Option 1",
+        MultiSelection = false,
+        Flag = "Dropdown2",
+        Callback = function(Option)
+            print(Option)
+        end,
+    })
+    local Label = Tab:CreateLabel("Thanks for using Arrayfield, there were alot of issues but here we are!",Section)
+    local Paragraph = Tab:CreateParagraph({Title = "Paragraph Example", Content = "Paragraph Example"},Section)
+    local Sets = Tab:CreateSection('Set Functions',false)
+    local SButton
+    SButton = Tab:CreateButton({
+        Name = "Button Example",
+        Interact = 'Interact',
+        SectionParent = Sets,
+        Callback = function()
+            SButton:Set(nil,'New Interaction')
+        end
+    })
+    Tab:CreateButton({
+        Name = "Dropdown Set",
+        Interact = 'Interact',
+        SectionParent = Sets,
+        Callback = function()
+            SingleSelection:Set('Option 1')
+        end
+    })
+
+    local LockTesting = Tab:CreateSection('Lockdown Section',false)
+    local ToLock = {}
+    Tab:CreateToggle({
+        Name = "Lockdown",
+        SectionParent = LockTesting,
+        CurrentValue = false,
+        Callback = function(Value)
+            if Value then
+                for _,v in ToLock do
+                    v:Lock('Locked')
+                end
+            else
+                for _,v in ToLock do
+                    v:Unlock('Locked')
+                end
+            end
+        end,
+    })
+    Tab:CreateSpacing(LockTesting)
+    ToLock.Button = Tab:CreateButton({
+        SectionParent = LockTesting,
+        Name = "Button Example",
+        Interact = 'Interact',
+        Callback = function()
+            print('Pressed')
+        end,
+    })
+    ToLock.Toggle = Tab:CreateToggle({
+        SectionParent = LockTesting,
+        Name = "Toggle Example",
+        CurrentValue = false,
+        Flag = "Toggle2", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+        Callback = function(Value)
+            print(Value)
+        end,
+    })
+    ToLock.ColorPicker = Tab:CreateColorPicker({
+        Name = "Color Picker",
+        SectionParent = LockTesting,
+        Color = Color3.fromRGB(2,255,255),
+        Flag = "ColorPicker2",
+        Callback = function(Value)
+            print(Value)
+        end
+    })
+    ToLock.Slider = Tab:CreateSlider({
+        SectionParent = LockTesting,
+        Name = "Slider Example",
+        Range = {0, 100},
+        Increment = 10,
+        Suffix = "Bananas",
+        CurrentValue = 10,
+        Flag = "Slider2",
+        Callback = function(Value)
+            print(Value)
+        end,
+    })
+    ToLock.Keybind = Tab:CreateKeybind({
+        Name = "Keybind Example",
+        CurrentKeybind = "Q",
+        HoldToInteract = false,
+        SectionParent = LockTesting,
+        Flag = "Keybind2",
+        Callback = function(Keybind)
+
+        end,
+    })
+```
+
+</details>

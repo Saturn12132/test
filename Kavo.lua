@@ -992,12 +992,12 @@ function Kavo.CreateLib(kavName, themeList)
                 end)()
             end 
 
-                function Elements:NewToggle(tname, nTip, callback)
+                function Elements:NewToggle(tname, nTip, default, callback)
                     local TogFunction = {}
                     tname = tname or "Toggle"
                     nTip = nTip or "Prints Current Toggle State"
                     callback = callback or function() end
-                    local toggled = false
+                    local toggled = default or false
                     table.insert(SettingsT, tname)
 
                     local toggleElement = Instance.new("TextButton")

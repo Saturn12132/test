@@ -1,26 +1,19 @@
-local Notification = loadstring(game:HttpGet("https://api.irisapp.ca/Scripts/IrisBetterNotifications.lua"))()
+local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
 
-Notification.WallNotification("God", "Yeet", {
-    MainSettings = {
-        Orientation = "Left",
-        VisibleSize = UDim2.new(0.5, 0, 0.5, 0);
-        HiddenSize  = UDim2.new(0, 0, 0.5, 0),
-        TweenTime   = 0.8
-    },
-})
-
-Notification.Notify("{ Iris }", "Yeet", "rbxassetid://7258714296", {
-    Duration = 7,
-    
-    TitleSettings = {
-        TextXAlignment = Enum.TextXAlignment.Center,
-        Font = Enum.Font.SourceSansSemibold,
-    },
-
-    GradientSettings = {
-        GradientEnabled = false,
-        SolidColorEnabled = true,
-        SolidColor = Color3.fromRGB(124, 83, 240),
-        Retract = true
-    }
-})
+Notification:Notify(
+   {Title = "TEXT TITLE", Description = "DESCRIPTION"},
+   {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "option"},
+   {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State) print(tostring(State)) end}
+)
+wait(1)
+Notification:Notify(
+   {Title = "TEXT TITLE", Description = "DESCRIPTION"},
+   {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+   {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+)
+wait(1)
+Notification:Notify(
+   {Title = "TEXT TITLE", Description = "DESCRIPTION"},
+   {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "default"}
+)

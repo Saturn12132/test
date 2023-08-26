@@ -114,7 +114,7 @@ NotificationTable.CreateNotification = function(TitleData, Text, Image, Settings
 	if getgenv() and game:GetService("CoreGui"):FindFirstChild("RobloxGui"):FindFirstChild("NotificationFrame"):FindFirstChild("NotificationFolder") then
 		NotificationFolder = game:GetService("CoreGui").RobloxGui.NotificationFrame.NotificationFolder
 	else
-		NotificationFolder = Players.LocalPlayer.PlayerGui:FindFirstChild("NotificationFolder") or Instance.new("Folder", Players.LocalPlayer.PlayerGui)
+		game.CoreGui.RobloxGui:FindFirstChild("NotificationFolder") or Instance.new("Folder", game.CoreGui.RobloxGui)
 		NotificationFolder.Name = "NotificationFolder"
 	end
 

@@ -651,14 +651,14 @@ function OrionLib:MakeWindow(WindowConfig)
 		UIHidden = true
 		OrionLib:MakeNotification({
 			Name = "Interface Hidden",
-			Content = "Tap RightControl to reopen the interface",
+			Content = "Tap LeftBracket to reopen the interface",
 			Time = 5
 		})
 		WindowConfig.CloseCallback()
 	end)
 
 	AddConnection(UserInputService.InputBegan, function(Input)
-		if Input.KeyCode == Enum.KeyCode.RightControl and UIHidden then
+		if Input.KeyCode == Enum.KeyCode.LeftBracket and UIHidden then
 			MainWindow.Visible = true
 		end
 	end)
